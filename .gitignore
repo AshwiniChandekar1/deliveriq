@@ -2,3 +2,4 @@ Data/
 *.csv
 .ipynb_checkpoints/
 __pycache__/
+*.pbix
