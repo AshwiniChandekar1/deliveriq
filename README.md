@@ -1,4 +1,4 @@
-\# DeliverIQ: Late-Delivery Risk and Customer Experience Intelligence
+# DeliverIQ: Late-Delivery Risk and Customer Experience Intelligence
 
 
 
@@ -6,47 +6,47 @@ A portfolio project built on the public Olist Brazilian e-commerce dataset. It a
 
 
 
-1\. How often are orders delivered late, and where?
+1. How often are orders delivered late, and where?
 
-2\. Can we flag risky orders at purchase time, before they go wrong?
+2. Can we flag risky orders at purchase time, before they go wrong?
 
-3\. What do unhappy customers say, and how much of it is about delivery?
-
-
-
-\*\*Tools:\*\* MySQL, SQL, Python (pandas, SQLAlchemy, scikit-learn), Jupyter, Power BI, Git and GitHub.
+3. What do unhappy customers say, and how much of it is about delivery?
 
 
 
-\## Dashboard
+**Tools:** MySQL, SQL, Python (pandas, SQLAlchemy, scikit-learn), Jupyter, Power BI, Git and GitHub.
 
 
 
-\*\*Overview: how late are we, and where?\*\*
+## Dashboard
 
 
 
-!\[Overview page](dashboard\_overview.png)
+**Overview: how late are we, and where?**
 
 
 
-\*\*Delivery Risk: which orders should we watch?\*\* (orders placed April to August 2018, never seen by the model in training)
+![Overview page](dashboard_overview.png)
 
 
 
-!\[Delivery Risk page](dashboard\_risk.png)
+**Delivery Risk: which orders should we watch?** (orders placed April to August 2018, never seen by the model in training)
 
 
 
-\*\*Customer Voice: what do unhappy customers say?\*\*
+![Delivery Risk page](dashboard_risk.png)
 
 
 
-!\[Customer Voice page](dashboard\_voice.png)
+**Customer Voice: what do unhappy customers say?**
 
 
 
-\## Key findings
+![Customer Voice page](dashboard_voice.png)
+
+
+
+## Key findings
 
 
 
@@ -70,7 +70,7 @@ A portfolio project built on the public Olist Brazilian e-commerce dataset. It a
 
 
 
-\### Risk model
+### Risk model
 
 
 
@@ -78,11 +78,11 @@ The model ranks orders by late risk using only facts known at purchase time (mon
 
 
 
-\- Delivery date, delay and review score are excluded on purpose, because they are not known at purchase time (data leakage).
+- Delivery date, delay and review score are excluded on purpose, because they are not known at purchase time (data leakage).
 
-\- A random train/test split gave a flattering ROC-AUC of 0.778. A time-based split (train on orders before 2018-04-01, test on orders after) is the honest estimate: \*\*ROC-AUC about 0.71\*\* after adding distance and shipping-deadline features.
+- A random train/test split gave a flattering ROC-AUC of 0.778. A time-based split (train on orders before 2018-04-01, test on orders after) is the honest estimate: **ROC-AUC about 0.71** after adding distance and shipping-deadline features.
 
-\- Risk bands on the 32,150 test orders:
+- Risk bands on the 32,150 test orders:
 
 
 
@@ -102,7 +102,7 @@ High-band orders are about 4.5 times as likely to be late as Low-band orders. Th
 
 
 
-\## Project structure
+## Project structure
 
 
 
@@ -110,51 +110,51 @@ High-band orders are about 4.5 times as likely to be late as Low-band orders. Th
 
 | --- | --- |
 
-| `load\_olist\_to\_mysql.py` | Loads every Olist CSV into MySQL tables (password typed at run time, never stored) |
+| `load_olist_to_mysql.py` | Loads every Olist CSV into MySQL tables (password typed at run time, never stored) |
 
-| `DeliverIQ\_Queries.sql` | Health checks, indexes, data-quality checks, views and KPI queries |
+| `DeliverIQ_Queries.sql` | Health checks, indexes, data-quality checks, views and KPI queries |
 
-| `DeliverIQ\_model.ipynb` | Analysis, features, models, risk bands and review themes |
+| `DeliverIQ_model.ipynb` | Analysis, features, models, risk bands and review themes |
 
-| `DeliverIQ\_theme.json` | Power BI colour theme |
+| `DeliverIQ_theme.json` | Power BI colour theme |
 
-| `dashboard\_\*.png` | Dashboard screenshots |
-
-
-
-The data files (`\*.csv`) and the Power BI file are not stored in this repository.
+| `dashboard_*.png` | Dashboard screenshots |
 
 
 
-\## How to run it
+The data files (`*.csv`) and the Power BI file are not stored in this repository.
 
 
 
-1\. Download the Olist Brazilian E-Commerce dataset from Kaggle and put the CSV files in a folder called `Data`.
-
-2\. Create an empty MySQL database called `deliveriq`.
-
-3\. Install the packages: `pip install pandas sqlalchemy pymysql scikit-learn matplotlib notebook`.
-
-4\. Run `python load\_olist\_to\_mysql.py` and enter your MySQL password when asked.
-
-5\. Run `DeliverIQ\_Queries.sql` in MySQL to create the indexes and views.
-
-6\. Open `DeliverIQ\_model.ipynb` in Jupyter and run the cells from top to bottom.
+## How to run it
 
 
 
-\## Limitations
+1. Download the Olist Brazilian E-Commerce dataset from Kaggle and put the CSV files in a folder called `Data`.
+
+2. Create an empty MySQL database called `deliveriq`.
+
+3. Install the packages: `pip install pandas sqlalchemy pymysql scikit-learn matplotlib notebook`.
+
+4. Run `python load_olist_to_mysql.py` and enter your MySQL password when asked.
+
+5. Run `DeliverIQ_Queries.sql` in MySQL to create the indexes and views.
+
+6. Open `DeliverIQ_model.ipynb` in Jupyter and run the cells from top to bottom.
 
 
 
-\- The model is modest (ROC-AUC about 0.71). It is useful for ranking risk, not for predicting single orders with certainty.
+## Limitations
 
-\- The risk scores cover April to August 2018 only, because they come from the time-based test period.
 
-\- Complaint themes come from Portuguese keyword rules, so they are approximate and not checked against hand-labelled comments. "Never arrived" overlaps with delivery problems.
 
-\- Only reviews with a written comment are used for the Customer Voice page, and people who write comments tend to be less happy.
+- The model is modest (ROC-AUC about 0.71). It is useful for ranking risk, not for predicting single orders with certainty.
 
-\- A natural-language "ask your data" assistant was planned but is not built.
+- The risk scores cover April to August 2018 only, because they come from the time-based test period.
+
+- Complaint themes come from Portuguese keyword rules, so they are approximate and not checked against hand-labelled comments. "Never arrived" overlaps with delivery problems.
+
+- Only reviews with a written comment are used for the Customer Voice page, and people who write comments tend to be less happy.
+
+- A natural-language "ask your data" assistant was planned but is not built.
 
