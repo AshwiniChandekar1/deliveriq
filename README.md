@@ -120,6 +120,8 @@ High-band orders are about 4.5 times as likely to be late as Low-band orders. Th
 
 | `dashboard_*.png` | Dashboard screenshots |
 
+| Ask-your-data assistant | Cells at the end of `DeliverIQ_model.ipynb`: answers 15 question types from SQL, and a 22-question test |
+
 
 
 The data files (`*.csv`) and the Power BI file are not stored in this repository.
@@ -156,5 +158,5 @@ The data files (`*.csv`) and the Power BI file are not stored in this repository
 
 - Only reviews with a written comment are used for the Customer Voice page, and people who write comments tend to be less happy.
 
-- A natural-language "ask your data" assistant was planned but is not built.
+- The "ask your data" assistant is rule-based: it answers only the question types prepared for it, and replies that it cannot answer anything else. It uses no language model, so every number it prints comes from the database.
 
